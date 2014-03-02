@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8"/>
+    <title>RDF | Reality Distortion Field</title>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript">
+      function submitText()
+      {
+        $("#loadingSection").show();
+        $("#submitButton").attr("disabled", true);
+        $.post("/", $("#inputForm").serialize(), function(data){
+          $("#outputText").html(data);
+          $("#loadingSection").hide();
+          $("#submitButton").attr("disabled", false);
+        });
+      }
+      var auto_input = ["The database uses local Enterprise Java Beans that are injected in your application code to achieve no-query. Since the beans are a part of your application, the application can communicate with the beans without the need for TCP connectivity. BlobCity integrates the database logic into the Java EE platform itself, thus making it available to your application directly.",
+                        "A filter is not limited to accessing only the table that it operates on or the table on which the select is being performed. But a filter can do selects from other databases from within the filter block and can also perform mutation operations on other tables.",
+                        "The biggest advantage of using BlobCity is it's ability to deliver fixed time search operations on indexes. BlobCity stores indexes in a unique and proprietary manner. The custom indexing mechanism of BlobCity allows for performing complex search on indexing at near fixed time speeds which is irrespective of the size of the data in the database."];
+      function pickRandom() {
+        var rand = auto_input[Math.floor(Math.random() * auto_input.length)];
+        $("#inputText").val(rand);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Reality Distortion Field</h1>
+    <div id="inputSection">
+      <form id="inputForm" name="inputForm">
+	<span>Enter a few sentences or </span>
+	<span><a href="#" onclick="pickRandom(); return false">Pick a random sentence</a>
+	<br/>
+	<textarea name="inputText" id="inputText" rows="10" cols="50"></textarea>
+	<br/>
+	<input type="button" id="submitButton" value="Submit" onclick="submitText()"/>
+      </form>
+    </div>
+    <div id="loadingSection" style="display: none">
+      <span>Processing. Please wait...</span>
+    </div>
+    <br/>
+    <div id="outputSection">
+      <div id="outputText" style="max-width: 350px"/>
+    </div>
+  </body>
+</html>
